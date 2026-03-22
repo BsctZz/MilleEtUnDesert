@@ -1,0 +1,362 @@
+// ── Données circuits ────────────────────────────────────────────────────────
+const CIRCUITS = [
+    {
+        name: 'Tadrart Rouge', type: 'Bivouac', typeClass: 'type-bivouac',
+        duration: '6 jours / 5 nuits',
+        photos: ['Photos/Image 9.webp', 'Photos/Image 16.webp', 'Photos/Image 14.webp'],
+        desc: "Plongez au cœur des dunes de sable roux de la Tadrart, l'un des paysages les plus spectaculaires du Sahara. Cinq nuits en bivouac sous un ciel étoilé d'exception, entouré de formations rocheuses millénaires et d'horizons infinis à perte de vue.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg certifié', 'Équipe logistique locale', 'Bivouac complet (tentes, sacs de couchage)', 'Repas et eau minérale inclus']
+    },
+    {
+        name: 'Ihrir Essendilène', type: 'Bivouac', typeClass: 'type-bivouac',
+        duration: '6 jours / 5 nuits',
+        photos: ['Photos/Image 7.webp', 'Photos/Image 12.webp', 'Photos/Image 13.webp'],
+        desc: "Partez explorer les gorges et formations rocheuses spectaculaires d'Ihrir et d'Essendilène. Arches naturelles, gravures rupestres et bivouac sous un ciel d'une clarté absolue — une immersion totale dans le Sahara algérien.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg certifié', 'Équipe logistique locale', 'Bivouac complet (tentes, sacs de couchage)', 'Repas et eau minérale inclus']
+    },
+    {
+        name: 'Tadrart Rouge', type: 'Chameau', typeClass: 'type-chameau',
+        duration: '7 jours / 6 nuits',
+        photos: ['Photos/Image 8.webp', 'Photos/Image 17.webp', 'Photos/Image 15.webp'],
+        desc: "Traversez les dunes rouges de la Tadrart au rythme lent du dromadaire, comme les nomades touaregs depuis des siècles. Une expérience sensorielle unique : le balancement du chameau, le silence du désert, les couleurs de l'aube sur les dunes.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg et mehariste', 'Dromadaires et matériel de caravane', 'Bivouac complet', 'Repas et eau minérale inclus']
+    },
+    {
+        name: 'Ihrir Essendilène', type: 'Chameau', typeClass: 'type-chameau',
+        duration: '7 jours / 6 nuits',
+        photos: ['Photos/Image 3.webp', 'Photos/Image 18.webp', 'Photos/Image 19.webp'],
+        desc: "Découvrez les merveilles d'Ihrir au rythme doux du dromadaire. Canyons sauvages, gravures rupestres et rencontres avec la faune saharienne — une aventure nomade dans l'un des plus beaux massifs du Tassili n'Ajjer.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg et mehariste', 'Dromadaires et matériel de caravane', 'Bivouac complet', 'Repas et eau minérale inclus']
+    },
+    {
+        name: 'Tadrart Rouge', type: 'À pied', typeClass: 'type-pied',
+        duration: '10 jours / 9 nuits',
+        photos: ['Photos/Image 4.webp', 'Photos/Image 20.webp', 'Photos/Image 16.webp'],
+        desc: "La traversée intégrale de la Tadrart Rouge à pied — le circuit phare pour les amoureux de grands espaces. Dix jours d'immersion absolue dans les dunes et les canyons, en petits groupes, avec une équipe locale expérimentée.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg certifié', 'Équipe de portage et logistique', 'Bivouac complet', 'Repas et eau minérale inclus', 'Matériel de randonnée disponible']
+    },
+    {
+        name: 'Ihrir', type: 'À pied', typeClass: 'type-pied',
+        duration: '7 jours / 6 nuits',
+        photos: ['Photos/Image 6.webp', 'Photos/Image 12.webp', 'Photos/Image 19.webp'],
+        desc: "Trek à pied dans les paysages lunaires d'Ihrir, classé patrimoine mondial de l'UNESCO. Gravures rupestres vieilles de 10 000 ans, arches et couloirs de pierre — un voyage dans le temps au cœur du Sahara algérien.",
+        inclus: ['Transferts depuis/vers Djanet', 'Guide touareg certifié', 'Équipe de portage', 'Bivouac complet', 'Repas et eau minérale inclus']
+    },
+    {
+        name: 'Trek Sefar', type: 'Trek', typeClass: 'type-trek',
+        duration: '6 jours / 5 nuits',
+        photos: ['Photos/Image 11.webp', 'Photos/Image 13.webp', 'Photos/Image 14.webp'],
+        desc: "Sefar, le \"musée à ciel ouvert\" du Tassili — une forêt de pierre habitée par des milliers de gravures et peintures rupestres vieilles de 10 000 ans. Un circuit d'exception pour les passionnés d'histoire et de paysages hors du commun.",
+        inclus: ["Transferts depuis/vers Djanet", "Guide touareg et archéologue local", "Permis d'accès parc national inclus", "Bivouac complet", "Repas et eau minérale inclus"]
+    }
+];
+
+// ── Carousel circuits ────────────────────────────────────────────────────────
+(function() {
+    const track     = document.getElementById('circuits-track');
+    const dotsWrap  = document.getElementById('circuits-dots');
+    const btnPrev   = document.getElementById('circuits-prev');
+    const btnNext   = document.getElementById('circuits-next');
+    if (!track) return;
+
+    let current = 0;
+
+    const TOTAL = CIRCUITS.length;
+
+    // Injecter les cartes
+    CIRCUITS.forEach((c, i) => {
+        const card = document.createElement('div');
+        card.className = 'circuit-card';
+        card.dataset.index = i;
+        card.innerHTML = `
+            <div class="circuit-image"><img src="${c.photos[0]}" alt="${c.name}" loading="lazy"></div>
+            <div class="circuit-content">
+                <span class="circuit-type ${c.typeClass}">${c.type}</span>
+                <h3>${c.name}</h3>
+                <span class="circuit-duration">${c.duration}</span>
+                <p>${c.desc.substring(0, 120)}…</p>
+                <button class="btn btn-primary circuit-open-modal" data-index="${i}">Je rejoins l'aventure</button>
+            </div>`;
+        // Clic sur card latérale → navigation
+        card.addEventListener('click', e => {
+            if (e.target.closest('.circuit-open-modal')) return;
+            const diff = ((i - current) + TOTAL) % TOTAL;
+            if (diff === 0)              openCircuitModal(i);
+            else if (diff === 1)         goCircuit(current + 1);
+            else if (diff === TOTAL - 1) goCircuit(current - 1);
+        });
+        track.appendChild(card);
+
+        const dot = document.createElement('button');
+        dot.className = 'circuits-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Circuit ${i + 1}`);
+        dot.addEventListener('click', () => goCircuit(i));
+        dotsWrap.appendChild(dot);
+    });
+
+    function goCircuit(n) {
+        current = ((n % TOTAL) + TOTAL) % TOTAL;
+        track.querySelectorAll('.circuit-card').forEach((card, i) => {
+            const diff = ((i - current) + TOTAL) % TOTAL;
+            card.classList.remove('cc-active', 'cc-prev', 'cc-next', 'cc-hidden');
+            if (diff === 0)          card.classList.add('cc-active');
+            else if (diff === 1)     card.classList.add('cc-next');
+            else if (diff === TOTAL - 1) card.classList.add('cc-prev');
+            else                     card.classList.add('cc-hidden');
+        });
+        dotsWrap.querySelectorAll('.circuits-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    goCircuit(0);
+    btnPrev.addEventListener('click', () => goCircuit(current - 1));
+    btnNext.addEventListener('click', () => goCircuit(current + 1));
+
+    // Swipe tactile
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) goCircuit(diff > 0 ? current + 1 : current - 1);
+    });
+
+    // Modal circuit
+    const modal    = document.getElementById('circuit-modal');
+    const mClose   = document.getElementById('circuit-modal-close');
+    const mGallery = document.getElementById('circuit-modal-gallery');
+    const mBadge   = document.getElementById('circuit-modal-badge');
+    const mDur     = document.getElementById('circuit-modal-duration');
+    const mTitle   = document.getElementById('circuit-modal-title');
+    const mDesc    = document.getElementById('circuit-modal-desc');
+    const mInclus  = document.getElementById('circuit-modal-inclus');
+
+    function openCircuitModal(idx) {
+        const c = CIRCUITS[idx];
+        mGallery.innerHTML = c.photos.map(p => `<img src="${p}" alt="${c.name}" loading="lazy">`).join('');
+        mBadge.className   = `circuit-type ${c.typeClass}`;
+        mBadge.textContent = c.type;
+        mDur.textContent   = c.duration;
+        mTitle.textContent = c.name;
+        mDesc.textContent  = c.desc;
+        mInclus.innerHTML  = c.inclus.map(item => `<li>${item}</li>`).join('');
+        modal.setAttribute('aria-hidden', 'false');
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeCircuitModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    document.addEventListener('click', e => {
+        const btn = e.target.closest('.circuit-open-modal');
+        if (btn) { e.stopPropagation(); openCircuitModal(+btn.dataset.index); }
+    });
+
+    mClose.addEventListener('click', closeCircuitModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeCircuitModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeCircuitModal(); });
+})();
+
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const navOverlay = document.getElementById('nav-overlay');
+
+function closeMenu() {
+    hamburger.classList.remove('open');
+    navMenu.classList.remove('open');
+    navOverlay.classList.remove('visible');
+    document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open', isOpen);
+    navOverlay.classList.toggle('visible', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+navOverlay.addEventListener('click', closeMenu);
+
+navMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', closeMenu);
+});
+
+const revealEls = document.querySelectorAll(
+    '.section-title, .section-subtitle, .about-text, .about-image, ' +
+    '.photo-item, .experience-item, .testimonial-card, ' +
+    '.final-cta h2, .final-cta p'
+);
+
+revealEls.forEach(el => el.classList.add('reveal'));
+
+// Décalage progressif pour les grilles
+document.querySelectorAll('.photo-item, .experience-item, .testimonial-card')
+    .forEach((el, i) => { el.style.transitionDelay = `${(i % 3) * 0.15}s`; });
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => observer.observe(el));
+
+// Carousel
+const slides = document.querySelectorAll('.carousel-slide');
+const dotsContainer = document.querySelector('.carousel-dots');
+let current = 0, autoTimer;
+
+slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Image ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+});
+
+function goTo(n) {
+    slides[current].classList.remove('active');
+    dotsContainer.children[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dotsContainer.children[current].classList.add('active');
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 4500);
+}
+
+document.querySelector('.carousel-btn.prev').addEventListener('click', () => goTo(current - 1));
+document.querySelector('.carousel-btn.next').addEventListener('click', () => goTo(current + 1));
+
+autoTimer = setInterval(() => goTo(current + 1), 4500);
+
+// Scroll spy — lien actif dans la nav
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+const spyObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+            if (active) active.classList.add('active');
+        }
+    });
+}, { rootMargin: '-30% 0px -60% 0px' });
+
+sections.forEach(s => spyObserver.observe(s));
+
+// ── Avis Google via Places API ──────────────────────────────────────────────
+// Remplacez ces deux valeurs avant mise en ligne :
+const GOOGLE_API_KEY  = 'AIzaSyB9XwJWg6zWnu88K2VxRsRmc-VAGPBWurg';
+const GOOGLE_PLACE_ID = 'ChIJIbMt8lZCvq8RnAc2OxVFldo';  // Mille et un Désert — Djanet
+
+async function loadGoogleReviews() {
+    const grid = document.getElementById('reviews-grid');
+    if (!grid) return;
+    const url = `https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}` +
+                `?languageCode=fr&key=${GOOGLE_API_KEY}`;
+    const res = await fetch(url, {
+        headers: { 'X-Goog-FieldMask': 'reviews,rating,userRatingCount' }
+    });
+    const data = await res.json();
+
+    // Note globale dynamique
+    if (data.rating) {
+        const ratingNum = document.getElementById('g-rating-number');
+        const starsRow   = document.getElementById('g-stars-row');
+        const ratingCount = document.getElementById('g-rating-count');
+        if (ratingNum)   ratingNum.textContent  = data.rating.toFixed(1).replace('.', ',');
+        if (starsRow)    starsRow.textContent   = '★'.repeat(Math.round(data.rating));
+        if (ratingCount) ratingCount.textContent = `${data.userRatingCount} avis Google`;
+    }
+
+    // Cartes d'avis
+    if (data.reviews && data.reviews.length) {
+        const reviews = data.reviews.slice(0, 3);
+        grid.innerHTML = reviews.map((r, i) => `
+            <div class="review-api-card" data-index="${i}">
+                <div class="review-author-row">
+                    <div class="review-avatar">${(r.authorAttribution?.displayName || '?').charAt(0).toUpperCase()}</div>
+                    <div class="review-author-info">
+                        <span class="review-author-name">${r.authorAttribution?.displayName || 'Anonyme'}</span>
+                        <span class="review-date">${r.relativePublishTimeDescription || ''}</span>
+                    </div>
+                </div>
+                <div class="review-stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+                <p class="review-text">${r.text?.text || ''}</p>
+                <button class="review-read-more">Lire la suite →</button>
+            </div>
+        `).join('');
+
+        // Gestion popup
+        const modal    = document.getElementById('review-modal');
+        const mClose   = document.getElementById('review-modal-close');
+        const mPrev    = document.getElementById('modal-prev');
+        const mNext    = document.getElementById('modal-next');
+        const mAvatar  = document.getElementById('modal-avatar');
+        const mName    = document.getElementById('modal-name');
+        const mDate    = document.getElementById('modal-date');
+        const mStars   = document.getElementById('modal-stars');
+        const mText    = document.getElementById('modal-text');
+        const mCounter = document.getElementById('modal-counter');
+        let currentIdx = 0;
+
+        function fillModal(idx) {
+            const r = reviews[idx];
+            mAvatar.textContent  = (r.authorAttribution?.displayName || '?').charAt(0).toUpperCase();
+            mName.textContent    = r.authorAttribution?.displayName || 'Anonyme';
+            mDate.textContent    = r.relativePublishTimeDescription || '';
+            mStars.textContent   = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+            mText.textContent    = r.text?.text || '';
+            mCounter.textContent = `${idx + 1} / ${reviews.length}`;
+        }
+
+        function openModal(idx) {
+            currentIdx = idx;
+            fillModal(currentIdx);
+            modal.setAttribute('aria-hidden', 'false');
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        grid.querySelectorAll('.review-api-card').forEach(card => {
+            card.addEventListener('click', () => openModal(+card.dataset.index));
+        });
+
+        mPrev.addEventListener('click', e => { e.stopPropagation(); currentIdx = (currentIdx - 1 + reviews.length) % reviews.length; fillModal(currentIdx); });
+        mNext.addEventListener('click', e => { e.stopPropagation(); currentIdx = (currentIdx + 1) % reviews.length; fillModal(currentIdx); });
+        mClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+        document.addEventListener('keydown', e => {
+            if (!modal.classList.contains('open')) return;
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft')  { currentIdx = (currentIdx - 1 + reviews.length) % reviews.length; fillModal(currentIdx); }
+            if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % reviews.length; fillModal(currentIdx); }
+        });
+    }
+}
+
+loadGoogleReviews();
+
+// ── Scroll : navbar compacte + scroll-to-top ────────────────────────────────
+const navEl       = document.querySelector('nav');
+const scrollTopBtn = document.getElementById('scroll-top');
+
+window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 80);
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+}, { passive: true });
+
+scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
