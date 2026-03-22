@@ -786,14 +786,19 @@ section {
 /* Badges type de circuit */
 .circuit-type {
     display: inline-block;
-    padding: 0.18rem 0.7rem;
+    padding: 0.3rem 1rem;
     border-radius: 20px;
     font-family: 'Montserrat', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 1.2px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     margin-bottom: 0.6rem;
+}
+
+.circuit-content > .circuit-type {
+    display: block;
+    text-align: center;
 }
 
 .type-bivouac {
@@ -1150,15 +1155,23 @@ section {
 .review-modal-box {
     background: #FAF6F0;
     border-radius: 14px;
-    padding: 2rem 2.2rem;
     max-width: 560px;
     width: 90%;
     max-height: 80vh;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.25);
     transform: translateY(20px);
     transition: transform 0.25s;
+}
+
+.review-modal-scroll {
+    overflow-y: auto;
+    flex: 1;
+    padding: 2rem 2.2rem;
+    padding-top: 1rem;
 }
 
 .review-modal-overlay.open .review-modal-box {
@@ -1228,11 +1241,18 @@ section {
     max-width: 780px;
     width: 100%;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
     box-shadow: 0 30px 80px rgba(0,0,0,0.35);
     transform: translateY(24px) scale(0.98);
     transition: transform 0.3s;
     position: relative;
+}
+
+.circuit-modal-scroll {
+    overflow-y: auto;
+    flex: 1;
 }
 
 .circuit-modal-overlay.open .circuit-modal-box {
