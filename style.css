@@ -722,6 +722,19 @@ section {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.circuit-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1.4rem;
+}
+
+.circuit-content .btn-primary {
+    margin-top: auto;
 }
 
 .circuit-card.cc-active:hover {
@@ -744,10 +757,6 @@ section {
 
 .circuit-card.cc-active:hover .circuit-image img {
     transform: scale(1.05);
-}
-
-.circuit-content {
-    padding: 1.4rem;
 }
 
 .circuit-content h3 {
