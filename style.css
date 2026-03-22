@@ -123,8 +123,7 @@ nav.scrolled .logo-icon-clip {
 @media (max-width: 768px) {
     .whatsapp-float {
         bottom: 2rem;
-        left: auto;
-        right: 1rem;
+        left: 1rem;
         padding: 0.65rem;
         border-radius: 50%;
     }
@@ -2008,7 +2007,7 @@ section[id] {
     /* Hero */
     .hero {
         background-attachment: scroll; /* iOS parallax fix */
-        padding-bottom: 100px;
+        padding-bottom: 180px;
     }
 
     .hero h1 {
