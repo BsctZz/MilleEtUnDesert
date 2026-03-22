@@ -1922,6 +1922,12 @@ section[id] {
 
 /* ─── Tablet ─── */
 @media (max-width: 1024px) {
+    .hero {
+        background-attachment: scroll; /* iOS/iPadOS fix */
+        justify-content: center;
+        padding-bottom: 5vh;
+    }
+
     .hero h1 {
         font-size: 3.2rem;
         letter-spacing: 4px;
