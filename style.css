@@ -2040,7 +2040,7 @@ section[id] {
 
     /* Circuits carousel — cartes réduites pour mobile */
     .circuits-carousel-viewport {
-        height: 560px;
+        height: 600px;
     }
 
     .circuit-card {
@@ -2049,7 +2049,11 @@ section[id] {
     }
 
     .circuit-image {
-        height: 180px;
+        height: 170px;
+    }
+
+    .circuit-content h3 {
+        font-size: 1.3rem;
     }
 
     .circuit-card.cc-prev {
@@ -2241,7 +2245,7 @@ section[id] {
 
     /* Carousel encore plus compact */
     .circuits-carousel-viewport {
-        height: 540px;
+        height: 580px;
     }
 
     .circuit-card {
