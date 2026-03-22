@@ -217,7 +217,7 @@ nav.scrolled .logo-icon-clip {
                 url('Photos/image00001.webp');
     background-size: cover;
     background-position: center 65%;
-    background-attachment: fixed;
+    background-attachment: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -1923,7 +1923,6 @@ section[id] {
 /* ─── Tablet ─── */
 @media (max-width: 1024px) {
     .hero {
-        background-attachment: scroll; /* iOS/iPadOS fix */
         justify-content: center;
         padding-bottom: 5vh;
     }
@@ -2012,7 +2011,6 @@ section[id] {
 
     /* Hero */
     .hero {
-        background-attachment: scroll; /* iOS parallax fix */
         padding-bottom: 180px;
     }
 
