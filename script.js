@@ -466,7 +466,7 @@ async function loadGoogleReviews() {
 
     // Cartes d'avis
     if (data.reviews && data.reviews.length) {
-        const reviews = data.reviews.slice(0, 3);
+        const reviews = data.reviews.slice(0, 10);
         grid.innerHTML = reviews.map((r, i) => `
             <div class="review-api-card" data-index="${i}">
                 <div class="review-author-row">
