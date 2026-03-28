@@ -265,8 +265,14 @@
                     <div class="google-rating-count" id="g-rating-count"></div>
                 </div>
             </div>
-            <!-- Les cartes d'avis sont injectées ici par le script -->
-            <div id="reviews-grid" class="reviews-api-grid"></div>
+            <div class="reviews-carousel-wrapper">
+                <button class="circuits-nav" id="reviews-prev" aria-label="Avis précédent"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M9 2L2 9L9 16" stroke="#C9A961" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+                <div class="reviews-carousel-viewport">
+                    <div id="reviews-grid" class="reviews-api-grid"></div>
+                </div>
+                <button class="circuits-nav" id="reviews-next" aria-label="Avis suivant"><svg width="11" height="18" viewBox="0 0 11 18" fill="none"><path d="M2 2L9 9L2 16" stroke="#C9A961" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+            <div class="reviews-dots" id="reviews-dots"></div>
             <div class="google-reviews-link" style="margin-top:2rem;">
                 <a href="https://www.google.com/maps?cid=15750571229288204188" target="_blank" rel="noopener" class="btn btn-google">
                     <svg class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

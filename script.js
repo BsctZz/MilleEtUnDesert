@@ -482,6 +482,53 @@ async function loadGoogleReviews() {
             </div>
         `).join('');
 
+        // ── Carousel avis ──────────────────────────────────────────────────────
+        const rvPrev     = document.getElementById('reviews-prev');
+        const rvNext     = document.getElementById('reviews-next');
+        const rvDotsWrap = document.getElementById('reviews-dots');
+        let rvCurrent = 0;
+
+        function getRvVisible() {
+            return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
+        }
+
+        function buildRvDots() {
+            if (!rvDotsWrap) return;
+            rvDotsWrap.innerHTML = '';
+            const count = Math.max(1, reviews.length - getRvVisible() + 1);
+            for (let i = 0; i < count; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'reviews-dot' + (i === rvCurrent ? ' active' : '');
+                dot.setAttribute('aria-label', `Page ${i + 1}`);
+                dot.addEventListener('click', () => goReview(i));
+                rvDotsWrap.appendChild(dot);
+            }
+        }
+
+        function goReview(n) {
+            const visible = getRvVisible();
+            const max = Math.max(0, reviews.length - visible);
+            rvCurrent = Math.max(0, Math.min(n, max));
+            const viewport = document.querySelector('.reviews-carousel-viewport');
+            if (!viewport) return;
+            const gap = 24;
+            const cardW = (viewport.offsetWidth - gap * (visible - 1)) / visible;
+            grid.style.transform = `translateX(-${rvCurrent * (cardW + gap)}px)`;
+            if (rvDotsWrap) rvDotsWrap.querySelectorAll('.reviews-dot').forEach((d, i) => d.classList.toggle('active', i === rvCurrent));
+        }
+
+        buildRvDots();
+        if (rvPrev) rvPrev.addEventListener('click', () => goReview(rvCurrent - 1));
+        if (rvNext) rvNext.addEventListener('click', () => goReview(rvCurrent + 1));
+
+        let rvTouchX = 0;
+        grid.addEventListener('touchstart', e => { rvTouchX = e.touches[0].clientX; }, { passive: true });
+        grid.addEventListener('touchend', e => {
+            const diff = rvTouchX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) goReview(diff > 0 ? rvCurrent + 1 : rvCurrent - 1);
+        });
+        window.addEventListener('resize', () => { buildRvDots(); goReview(0); });
+
         // Gestion popup
         const modal    = document.getElementById('review-modal');
         const mClose   = document.getElementById('review-modal-close');
