@@ -1,5 +1,8 @@
+// ── Langue ───────────────────────────────────────────────────────────────────
+let LANG = localStorage.getItem('lang') || 'fr';
+
 // ── Données circuits ────────────────────────────────────────────────────────
-const CIRCUITS = [
+const CIRCUITS_FR = [
     {
         name: 'Tadrart Rouge', type: 'Bivouac', typeClass: 'type-bivouac',
         duration: '6 jours / 5 nuits',
@@ -51,6 +54,182 @@ const CIRCUITS = [
     }
 ];
 
+const CIRCUITS_EN = [
+    {
+        name: 'Tadrart Rouge', type: 'Bivouac', typeClass: 'type-bivouac',
+        duration: '6 days / 5 nights',
+        photos: ['Photos/Image 9.webp', 'Photos/Image 16.webp', 'Photos/Image 14.webp'],
+        desc: "Immerse yourself in the red sand dunes of the Tadrart, one of the most spectacular landscapes in the Sahara. Five nights bivouacking under an exceptional starry sky, surrounded by ancient rock formations and endless horizons as far as the eye can see.",
+        inclus: ['Transfers from/to Djanet', 'Certified Tuareg guide', 'Local logistics team', 'Full bivouac (tents, sleeping bags)', 'Meals and mineral water included']
+    },
+    {
+        name: 'Ihrir Essendilène', type: 'Bivouac', typeClass: 'type-bivouac',
+        duration: '6 days / 5 nights',
+        photos: ['Photos/Image 7.webp', 'Photos/Image 12.webp', 'Photos/Image 13.webp'],
+        desc: "Explore the spectacular gorges and rock formations of Ihrir and Essendilène. Natural arches, rock engravings and bivouac under a perfectly clear sky — a total immersion in the Algerian Sahara.",
+        inclus: ['Transfers from/to Djanet', 'Certified Tuareg guide', 'Local logistics team', 'Full bivouac (tents, sleeping bags)', 'Meals and mineral water included']
+    },
+    {
+        name: 'Tadrart Rouge', type: 'Camel', typeClass: 'type-chameau',
+        duration: '7 days / 6 nights',
+        photos: ['Photos/Image 8.webp', 'Photos/Image 17.webp', 'Photos/Image 15.webp'],
+        desc: "Cross the red dunes of the Tadrart at the slow pace of the dromedary, as Tuareg nomads have done for centuries. A unique sensory experience: the sway of the camel, the silence of the desert, the colors of dawn on the dunes.",
+        inclus: ['Transfers from/to Djanet', 'Tuareg guide and camel driver', 'Dromedaries and caravan equipment', 'Full bivouac', 'Meals and mineral water included']
+    },
+    {
+        name: 'Ihrir Essendilène', type: 'Camel', typeClass: 'type-chameau',
+        duration: '7 days / 6 nights',
+        photos: ['Photos/Image 3.webp', 'Photos/Image 18.webp', 'Photos/Image 19.webp'],
+        desc: "Discover the wonders of Ihrir at the gentle pace of the dromedary. Wild canyons, rock engravings and encounters with Saharan wildlife — a nomadic adventure in one of the most beautiful massifs of the Tassili n'Ajjer.",
+        inclus: ['Transfers from/to Djanet', 'Tuareg guide and camel driver', 'Dromedaries and caravan equipment', 'Full bivouac', 'Meals and mineral water included']
+    },
+    {
+        name: 'Tadrart Rouge', type: 'On foot', typeClass: 'type-pied',
+        duration: '10 days / 9 nights',
+        photos: ['Photos/Image 4.webp', 'Photos/Image 20.webp', 'Photos/Image 16.webp'],
+        desc: "The complete crossing of the Tadrart Rouge on foot — the flagship circuit for lovers of wide open spaces. Ten days of absolute immersion in the dunes and canyons, in small groups, with an experienced local team.",
+        inclus: ['Transfers from/to Djanet', 'Certified Tuareg guide', 'Porter and logistics team', 'Full bivouac', 'Meals and mineral water included', 'Hiking equipment available']
+    },
+    {
+        name: 'Ihrir', type: 'On foot', typeClass: 'type-pied',
+        duration: '7 days / 6 nights',
+        photos: ['Photos/Image 6.webp', 'Photos/Image 12.webp', 'Photos/Image 19.webp'],
+        desc: "Trekking on foot through the lunar landscapes of Ihrir, a UNESCO World Heritage Site. Rock engravings 10,000 years old, arches and stone corridors — a journey through time in the heart of the Algerian Sahara.",
+        inclus: ['Transfers from/to Djanet', 'Certified Tuareg guide', 'Porter team', 'Full bivouac', 'Meals and mineral water included']
+    },
+    {
+        name: 'Trek Sefar', type: 'Trek', typeClass: 'type-trek',
+        duration: '6 days / 5 nights',
+        photos: ['Photos/Image 11.webp', 'Photos/Image 13.webp', 'Photos/Image 14.webp'],
+        desc: "Sefar, the 'open-air museum' of the Tassili — a stone forest inhabited by thousands of rock engravings and paintings 10,000 years old. An exceptional circuit for lovers of history and extraordinary landscapes.",
+        inclus: ['Transfers from/to Djanet', 'Tuareg guide and local archaeologist', 'National park access permit included', 'Full bivouac', 'Meals and mineral water included']
+    }
+];
+
+let CIRCUITS = LANG === 'en' ? CIRCUITS_EN : CIRCUITS_FR;
+
+// ── Traductions ──────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+    fr: {
+        'nav-home': 'Accueil',
+        'nav-adventure': 'Aventure',
+        'nav-tours': 'Circuits',
+        'nav-gallery': 'Galerie',
+        'nav-reviews': 'Avis',
+        'nav-contact': 'Contact',
+        'hero-p1': "Avec Mille et un Désert, partez pour un voyage au cœur de l'immensité du Sahara : nuits sous les étoiles, horizons infinis et immersion dans l'univers touareg.",
+        'hero-p2': "Spécialisée exclusivement sur Djanet et le Tassili n'Ajjer, notre agence vous propose des voyages authentiques en petits groupes ou sur mesure.",
+        'about-h2': "Votre aventure au cœur du Sahara algérien",
+        'about-p1': "Basée à Djanet, porte d'entrée du Tassili n'Ajjer, notre agence vous invite à découvrir l'un des plus beaux déserts du monde. Nous organisons des circuits authentiques qui vous plongent dans la culture touarègue et les paysages à couper le souffle du Sahara algérien.",
+        'about-p2': "Chaque voyage est une immersion totale : bivouac sous les étoiles, rencontres avec les habitants, découverte des gravures rupestres millénaires, et exploration des dunes et canyons majestueux.",
+        'about-btn': "Nous contacter",
+        'tours-title': "Nos circuits dans le désert",
+        'tours-sub': "Djanet & Tassili n'Ajjer — choisissez votre aventure saharienne",
+        'modal-cta-btn': "Demander ce circuit",
+        'gallery-label': "Le désert en images",
+        'exp-title': "Une expérience unique vous attend",
+        'exp-sub': "Vivez des moments inoubliables au cœur du désert algérien",
+        'exp-biv-title': "Bivouac authentique",
+        'exp-biv-desc': "Nuits sous les étoiles dans le désert, au cœur de la nature saharienne",
+        'exp-cult-title': "Culture touarègue",
+        'exp-cult-desc': "Immersion totale dans les traditions et la vie des habitants du désert",
+        'exp-land-title': "Paysages uniques",
+        'exp-land-desc': "Découvrez les gravures rupestres, dunes et canyons du Tassili n'Ajjer",
+        'reviews-title': "Ce que disent nos voyageurs",
+        'reviews-sub': "Des expériences inoubliables partagées par nos clients",
+        'reviews-btn': "Voir tous nos avis Google",
+        'cta-title': "Prêt pour l'aventure ?",
+        'cta-p': "Contactez-nous dès maintenant pour organiser votre circuit sur mesure",
+        'cta-btn': "Planifier mon voyage",
+        'contact-title': "Planifiez votre voyage",
+        'contact-sub': "Notre équipe à Djanet répond à toutes vos questions et crée votre aventure sur mesure",
+        'contact-wa-hint': "Réponse rapide",
+        'contact-email-hint': "Réponse sous 24h",
+        'social-title': "Suivez-nous",
+        'social-p': "Découvrez nos aventures au quotidien",
+        'footer-tagline1': "Votre agence locale à Djanet",
+        'footer-tagline2': "Découvrez le Sahara algérien authentique",
+        'footer-links-h': "Liens rapides",
+        'footer-link-adv': "Aventure",
+        'footer-link-tours': "Nos circuits",
+        'footer-link-gallery': "Galerie",
+        'footer-link-reviews': "Avis voyageurs",
+        'footer-link-contact': "Contact",
+        'footer-contact-h': "Contact",
+        'copyright': "© 2026 Mille et un Désert. Tous droits réservés.",
+        'wa-float-label': "Nous contacter",
+        'circuit-btn': "Je rejoins l'aventure"
+    },
+    en: {
+        'nav-home': 'Home',
+        'nav-adventure': 'Adventure',
+        'nav-tours': 'Tours',
+        'nav-gallery': 'Gallery',
+        'nav-reviews': 'Reviews',
+        'nav-contact': 'Contact',
+        'hero-p1': "With A Thousand and One Desert, embark on a journey into the heart of the vast Sahara: nights under the stars, endless horizons, and an immersion in the Tuareg world.",
+        'hero-p2': "Exclusively specialized in Djanet and the Tassili n'Ajjer, our agency offers authentic small-group or tailor-made trips.",
+        'about-h2': "Your adventure in the heart of the Algerian Sahara",
+        'about-p1': "Based in Djanet, gateway to the Tassili n'Ajjer, our agency invites you to discover one of the most beautiful deserts in the world. We organize authentic tours that immerse you in Tuareg culture and the breathtaking landscapes of the Algerian Sahara.",
+        'about-p2': "Every journey is a total immersion: bivouac under the stars, encounters with locals, discovery of ancient rock engravings, and exploration of majestic dunes and canyons.",
+        'about-btn': "Contact us",
+        'tours-title': "Our desert tours",
+        'tours-sub': "Djanet & Tassili n'Ajjer — choose your Saharan adventure",
+        'modal-cta-btn': "Request this tour",
+        'gallery-label': "The desert in images",
+        'exp-title': "A unique experience awaits you",
+        'exp-sub': "Live unforgettable moments in the heart of the Algerian desert",
+        'exp-biv-title': "Authentic Bivouac",
+        'exp-biv-desc': "Nights under the stars in the desert, in the heart of Saharan nature",
+        'exp-cult-title': "Tuareg Culture",
+        'exp-cult-desc': "Total immersion in the traditions and life of the desert's inhabitants",
+        'exp-land-title': "Unique Landscapes",
+        'exp-land-desc': "Discover the rock engravings, dunes and canyons of the Tassili n'Ajjer",
+        'reviews-title': "What our travelers say",
+        'reviews-sub': "Unforgettable experiences shared by our clients",
+        'reviews-btn': "See all our Google reviews",
+        'cta-title': "Ready for the adventure?",
+        'cta-p': "Contact us now to plan your tailor-made tour",
+        'cta-btn': "Plan my trip",
+        'contact-title': "Plan your trip",
+        'contact-sub': "Our team in Djanet answers all your questions and creates your tailor-made adventure",
+        'contact-wa-hint': "Quick response",
+        'contact-email-hint': "Response within 24h",
+        'social-title': "Follow us",
+        'social-p': "Discover our daily adventures",
+        'footer-tagline1': "Your local agency in Djanet",
+        'footer-tagline2': "Discover the authentic Algerian Sahara",
+        'footer-links-h': "Quick links",
+        'footer-link-adv': "Adventure",
+        'footer-link-tours': "Our tours",
+        'footer-link-gallery': "Gallery",
+        'footer-link-reviews': "Traveler reviews",
+        'footer-link-contact': "Contact",
+        'footer-contact-h': "Contact",
+        'copyright': "© 2026 Mille et un Désert. All rights reserved.",
+        'wa-float-label': "Contact us",
+        'circuit-btn': "Join the adventure"
+    }
+};
+
+// ── Fonction setLang ─────────────────────────────────────────────────────────
+function setLang(lang) {
+    LANG = lang;
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+    const t = TRANSLATIONS[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (t[key] !== undefined) el.textContent = t[key];
+    });
+    const btnFR = document.querySelector('.lang-toggle .lang-fr');
+    const btnEN = document.querySelector('.lang-toggle .lang-en');
+    if (btnFR) btnFR.classList.toggle('lang-active', lang === 'fr');
+    if (btnEN) btnEN.classList.toggle('lang-active', lang === 'en');
+    CIRCUITS = lang === 'en' ? CIRCUITS_EN : CIRCUITS_FR;
+    if (window._rebuildCircuits) window._rebuildCircuits();
+}
+
 // ── Carousel circuits ────────────────────────────────────────────────────────
 (function() {
     const track     = document.getElementById('circuits-track');
@@ -61,38 +240,45 @@ const CIRCUITS = [
 
     let current = 0;
 
-    const TOTAL = CIRCUITS.length;
+    function buildCards() {
+        track.innerHTML = '';
+        dotsWrap.innerHTML = '';
+        current = 0;
+        const TOTAL = CIRCUITS.length;
+        const btnLabel = TRANSLATIONS[LANG]['circuit-btn'];
 
-    // Injecter les cartes
-    CIRCUITS.forEach((c, i) => {
-        const card = document.createElement('div');
-        card.className = 'circuit-card';
-        card.dataset.index = i;
-        card.innerHTML = `
-            <div class="circuit-image"><img src="${c.photos[0]}" alt="${c.name}" loading="lazy"></div>
-            <div class="circuit-content">
-                <span class="circuit-type ${c.typeClass}">${c.type}</span>
-                <h3>${c.name}</h3>
-                <span class="circuit-duration">${c.duration}</span>
-                <p>${c.desc.substring(0, 120)}…</p>
-                <button class="btn btn-primary circuit-open-modal" data-index="${i}">Je rejoins l'aventure</button>
-            </div>`;
-        // Clic sur card latérale → navigation
-        card.addEventListener('click', e => {
-            if (e.target.closest('.circuit-open-modal')) return;
-            const diff = ((i - current) + TOTAL) % TOTAL;
-            if (diff === 0)              openCircuitModal(i);
-            else if (diff === 1)         goCircuit(current + 1);
-            else if (diff === TOTAL - 1) goCircuit(current - 1);
+        CIRCUITS.forEach((c, i) => {
+            const card = document.createElement('div');
+            card.className = 'circuit-card';
+            card.dataset.index = i;
+            card.innerHTML = `
+                <div class="circuit-image"><img src="${c.photos[0]}" alt="${c.name}" loading="lazy"></div>
+                <div class="circuit-content">
+                    <span class="circuit-type ${c.typeClass}">${c.type}</span>
+                    <h3>${c.name}</h3>
+                    <span class="circuit-duration">${c.duration}</span>
+                    <p>${c.desc.substring(0, 120)}…</p>
+                    <button class="btn btn-primary circuit-open-modal" data-index="${i}">${btnLabel}</button>
+                </div>`;
+            card.addEventListener('click', e => {
+                if (e.target.closest('.circuit-open-modal')) return;
+                const diff = ((i - current) + TOTAL) % TOTAL;
+                if (diff === 0)              openCircuitModal(i);
+                else if (diff === 1)         goCircuit(current + 1);
+                else if (diff === TOTAL - 1) goCircuit(current - 1);
+            });
+            track.appendChild(card);
+
+            const dot = document.createElement('button');
+            dot.className = 'circuits-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', `Circuit ${i + 1}`);
+            dot.addEventListener('click', () => goCircuit(i));
+            dotsWrap.appendChild(dot);
         });
-        track.appendChild(card);
+        goCircuit(0);
+    }
 
-        const dot = document.createElement('button');
-        dot.className = 'circuits-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Circuit ${i + 1}`);
-        dot.addEventListener('click', () => goCircuit(i));
-        dotsWrap.appendChild(dot);
-    });
+    buildCards();
 
     function goCircuit(n) {
         current = ((n % TOTAL) + TOTAL) % TOTAL;
@@ -107,7 +293,6 @@ const CIRCUITS = [
         dotsWrap.querySelectorAll('.circuits-dot').forEach((d, i) => d.classList.toggle('active', i === current));
     }
 
-    goCircuit(0);
     btnPrev.addEventListener('click', () => goCircuit(current - 1));
     btnNext.addEventListener('click', () => goCircuit(current + 1));
 
@@ -118,6 +303,8 @@ const CIRCUITS = [
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 40) goCircuit(diff > 0 ? current + 1 : current - 1);
     });
+
+    window._rebuildCircuits = buildCards;
 
     // Modal circuit
     const modal    = document.getElementById('circuit-modal');
@@ -360,3 +547,14 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// ── Toggle langue ────────────────────────────────────────────────────────────
+const langToggle = document.getElementById('lang-toggle');
+if (langToggle) {
+    langToggle.addEventListener('click', () => {
+        setLang(LANG === 'fr' ? 'en' : 'fr');
+    });
+}
+
+// Appliquer la langue sauvegardée au chargement
+if (LANG === 'en') setLang('en');

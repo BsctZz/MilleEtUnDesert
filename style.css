@@ -170,6 +170,45 @@ nav.scrolled .logo-icon-clip {
     height: 18px;
 }
 
+/* ── Bouton toggle langue ──────────────────────────────────────────────────── */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: transparent;
+    border: 1px solid rgba(201, 169, 97, 0.25);
+    border-radius: 4px;
+    padding: 0.28rem 0.55rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: rgba(232, 213, 196, 0.4);
+    transition: border-color 0.25s ease;
+    flex-shrink: 0;
+}
+
+.lang-toggle:hover {
+    border-color: rgba(201, 169, 97, 0.5);
+}
+
+.lang-toggle .lang-active {
+    color: #C9A961;
+}
+
+.lang-toggle .lang-sep {
+    color: rgba(232, 213, 196, 0.2);
+    font-weight: 300;
+}
+
+@media (max-width: 768px) {
+    .lang-toggle {
+        padding: 0.25rem 0.45rem;
+        font-size: 0.65rem;
+    }
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
