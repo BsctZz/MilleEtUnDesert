@@ -1,5 +1,5 @@
 // ── Langue ───────────────────────────────────────────────────────────────────
-let LANG = localStorage.getItem('lang') || 'fr';
+let LANG = window.__INIT_LANG__ || localStorage.getItem('lang') || 'fr';
 
 // ── Données circuits ────────────────────────────────────────────────────────
 const CIRCUITS_FR = [
@@ -600,9 +600,13 @@ scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior:
 const langToggle = document.getElementById('lang-toggle');
 if (langToggle) {
     langToggle.addEventListener('click', () => {
-        setLang(LANG === 'fr' ? 'en' : 'fr');
+        if (LANG === 'fr') {
+            window.location.href = 'en.html';
+        } else {
+            window.location.href = 'maquette.html';
+        }
     });
 }
 
-// Appliquer la langue sauvegardée au chargement
+// Appliquer la langue de la page au chargement
 if (LANG === 'en') setLang('en');
