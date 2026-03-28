@@ -239,12 +239,13 @@ function setLang(lang) {
     if (!track) return;
 
     let current = 0;
+    let TOTAL = CIRCUITS.length;
 
     function buildCards() {
         track.innerHTML = '';
         dotsWrap.innerHTML = '';
         current = 0;
-        const TOTAL = CIRCUITS.length;
+        TOTAL = CIRCUITS.length;
         const btnLabel = TRANSLATIONS[LANG]['circuit-btn'];
 
         CIRCUITS.forEach((c, i) => {
