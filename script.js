@@ -167,7 +167,7 @@ const TRANSLATIONS = {
         'nav-gallery': 'Gallery',
         'nav-reviews': 'Reviews',
         'nav-contact': 'Contact',
-        'hero-p1': "With A Thousand and One Desert, embark on a journey into the heart of the vast Sahara: nights under the stars, endless horizons, and an immersion in the Tuareg world.",
+        'hero-p1': "With Mille et un Désert, embark on a journey into the heart of the vast Sahara: nights under the stars, endless horizons, and an immersion in the Tuareg world.",
         'hero-p2': "Exclusively specialized in Djanet and the Tassili n'Ajjer, our agency offers authentic small-group or tailor-made trips.",
         'about-h2': "Your adventure in the heart of the Algerian Sahara",
         'about-p1': "Based in Djanet, gateway to the Tassili n'Ajjer, our agency invites you to discover one of the most beautiful deserts in the world. We organize authentic tours that immerse you in Tuareg culture and the breathtaking landscapes of the Algerian Sahara.",
