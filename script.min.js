@@ -617,14 +617,14 @@ window.addEventListener('scroll', () => {
 scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
 // ── Toggle langue ────────────────────────────────────────────────────────────
+// Pour ajouter une langue (ex: DE) : ajouter dans __LANG_URLS__ de chaque page
+// et ajouter un span.lang-de dans le bouton toggle.
 const langToggle = document.getElementById('lang-toggle');
 if (langToggle) {
+    const urls = window.__LANG_URLS__ || { fr: '../', en: '../en/' };
     langToggle.addEventListener('click', () => {
-        if (LANG === 'fr') {
-            window.location.href = 'en.html';
-        } else {
-            window.location.href = 'maquette.html';
-        }
+        const newLang = LANG === 'fr' ? 'en' : 'fr';
+        window.location.href = urls[newLang] || './';
     });
 }
 
