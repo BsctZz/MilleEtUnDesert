@@ -518,16 +518,36 @@ async function loadGoogleReviews() {
         }
 
         buildRvDots();
-        if (rvPrev) rvPrev.addEventListener('click', () => goReview(rvCurrent - 1));
-        if (rvNext) rvNext.addEventListener('click', () => goReview(rvCurrent + 1));
+        if (rvPrev) rvPrev.addEventListener('click', () => { goReview(rvCurrent - 1); resetRvTimer(); });
+        if (rvNext) rvNext.addEventListener('click', () => { goReview(rvCurrent + 1); resetRvTimer(); });
 
         let rvTouchX = 0;
-        grid.addEventListener('touchstart', e => { rvTouchX = e.touches[0].clientX; }, { passive: true });
+        grid.addEventListener('touchstart', e => { rvTouchX = e.touches[0].clientX; clearRvTimer(); }, { passive: true });
         grid.addEventListener('touchend', e => {
             const diff = rvTouchX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 40) goReview(diff > 0 ? rvCurrent + 1 : rvCurrent - 1);
+            resetRvTimer();
         });
         window.addEventListener('resize', () => { buildRvDots(); goReview(0); });
+
+        // ── Auto-rotation ──
+        let rvTimer = null;
+        const rvViewport = document.querySelector('.reviews-carousel-viewport');
+
+        function startRvTimer() {
+            return setInterval(() => {
+                const max = Math.max(0, reviews.length - getRvVisible());
+                goReview(rvCurrent >= max ? 0 : rvCurrent + 1);
+            }, 4500);
+        }
+        function clearRvTimer() { clearInterval(rvTimer); rvTimer = null; }
+        function resetRvTimer() { clearRvTimer(); rvTimer = startRvTimer(); }
+
+        rvTimer = startRvTimer();
+        if (rvViewport) {
+            rvViewport.addEventListener('mouseenter', clearRvTimer);
+            rvViewport.addEventListener('mouseleave', () => { rvTimer = startRvTimer(); });
+        }
 
         // Gestion popup
         const modal    = document.getElementById('review-modal');
