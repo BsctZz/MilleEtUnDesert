@@ -467,7 +467,9 @@ async function loadGoogleReviews() {
 
     // Cartes d'avis
     if (data.reviews && data.reviews.length) {
+        const REVIEWS_BLACKLIST = ['Célia Syd'];
         const reviews = data.reviews
+            .filter(r => !REVIEWS_BLACKLIST.includes(r.authorAttribution?.displayName))
             .slice()
             .sort((a, b) => {
                 const scoreA = a.rating * 100 + (a.text?.text?.length || 0);
