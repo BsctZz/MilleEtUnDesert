@@ -1,5 +1,6 @@
 // ── Langue ───────────────────────────────────────────────────────────────────
 let LANG = window.__INIT_LANG__ || localStorage.getItem('lang') || 'fr';
+const PHOTOS_BASE = window.location.pathname.includes('/en') ? '../' : '';
 
 // ── Données circuits ────────────────────────────────────────────────────────
 const CIRCUITS_FR = [
@@ -253,7 +254,7 @@ function setLang(lang) {
             card.className = 'circuit-card';
             card.dataset.index = i;
             card.innerHTML = `
-                <div class="circuit-image"><img src="${c.photos[0]}" alt="${c.name}" loading="lazy"></div>
+                <div class="circuit-image"><img src="${PHOTOS_BASE}${c.photos[0]}" alt="${c.name}" loading="lazy"></div>
                 <div class="circuit-content">
                     <span class="circuit-type ${c.typeClass}">${c.type}</span>
                     <h3>${c.name}</h3>
@@ -319,7 +320,7 @@ function setLang(lang) {
 
     function openCircuitModal(idx) {
         const c = CIRCUITS[idx];
-        mGallery.innerHTML = c.photos.map(p => `<img src="${p}" alt="${c.name}" loading="lazy">`).join('');
+        mGallery.innerHTML = c.photos.map(p => `<img src="${PHOTOS_BASE}${p}" alt="${c.name}" loading="lazy">`).join('');
         mBadge.className   = `circuit-type ${c.typeClass}`;
         mBadge.textContent = c.type;
         mDur.textContent   = c.duration;
