@@ -621,10 +621,9 @@ scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior:
 // et ajouter un span.lang-de dans le bouton toggle.
 const langToggle = document.getElementById('lang-toggle');
 if (langToggle) {
-    const urls = window.__LANG_URLS__ || { fr: '../', en: '../en/' };
     langToggle.addEventListener('click', () => {
-        const newLang = LANG === 'fr' ? 'en' : 'fr';
-        window.location.href = urls[newLang] || './';
+        const isEN = window.location.pathname.includes('/en');
+        window.location.href = isEN ? '../' : './en/';
     });
 }
 
